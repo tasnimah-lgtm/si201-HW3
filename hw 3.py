@@ -28,4 +28,18 @@ class CouponDispenser:
             return ""
         return "|".join(self.coupon_cards)
 
+    def issue_coupon(self,name):
+        
+         if not self.coupon_cards:
+             return "The box is empty."
+
+         if name in self.customer_roster:
+             index = self.issued_indices[self.customer_roster.index(name)]
+             return f"That name already has a coupon: {self.coupon_cards[index]}"
+
+         coupon_index = random.randint(0,len(self.coupon_cards) -1)
+         self.customer_roster.append(name)
+         self.issued_indices.append(coupon_index)
+         return self.coupon_cards[coupon_index]
+    
 
